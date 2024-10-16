@@ -1,0 +1,5 @@
+const AddAction = () => {
+    return <h2>AddAction</h2>;
+}
+
+export default AddAction;

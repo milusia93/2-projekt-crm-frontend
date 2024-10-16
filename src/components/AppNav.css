@@ -1,0 +1,23 @@
+.mainNav {
+background-color: rgba(234, 243, 252, 0.76);
+}
+
+ ul{
+    padding: 0;
+    margin-top: 0;
+}
+
+.mainNav ul li {
+    display: inline-block;
+    padding: 15px;
+}
+
+.mainNav ul li a {
+    text-decoration: none;
+    color: rgb(95, 99, 104);
+    font-weight: bold;
+}
+
+.mainNav ul li a:hover {
+    text-decoration: underline;
+}

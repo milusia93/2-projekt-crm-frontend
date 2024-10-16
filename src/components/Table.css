@@ -1,0 +1,46 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr:nth-of-type(odd) {
+    background-color: rgb(223, 213, 194);
+}
+
+th {
+    background-color: rgb(95, 99, 104);
+    color: rgb(223, 213, 194);
+    font-weight: bold;
+}
+
+td, th {
+    padding: 6px;
+    border: 1px solid rgb(247, 238, 223);
+    text-align: left;
+}
+
+td {
+    color: rgb(95, 99, 104);
+}
+
+table button {
+    padding: 8px;
+    margin: 1px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 10%;
+    border: 0;
+    
+}
+
+table button.delete {
+    background-color: rgb(158, 5, 5);
+      
+}
+table button.edit {
+    background-color: rgb(32, 32, 105);
+}
+
+table button.showMore {
+    background-color: rgb(4, 90, 4);
+}
