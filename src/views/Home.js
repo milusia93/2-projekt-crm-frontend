@@ -1,13 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Table from "../components/Table";
+import ClientsTable from "../components/ClientsTable";
 
 const Home = () => {
     const [clients, setClients] = useState([])
-
-    useEffect(() => {
-        getAllClients();
-    }, [])
 
     const getAllClients = () => {
         axios.get('http://localhost:3005/clients')
@@ -19,9 +15,13 @@ const Home = () => {
             })
     }
 
+    useEffect(() => {
+        getAllClients();
+    }, [])
+    
     return (
         <div className="tableContainer">
-            <Table clients={clients}/>
+            <ClientsTable clients={clients}/>
         </div>
     )
 }

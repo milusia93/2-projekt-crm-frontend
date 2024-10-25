@@ -1,6 +1,7 @@
-import './Table.css';
 
-const Table = (props) => {
+import './ClientsTable.css';
+
+const SingleClientTable = (props) => {
     
     return (
         <table>
@@ -14,23 +15,19 @@ const Table = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {props.clients.map((client, index)=> {
-                    return (
-                        <tr key={client._id}>
+                
+                   
+                        {/* <tr key={client._id}>
                             <td>{index}</td>
                             <td>{client.name}</td>
                             <td>{client.address.city}, {client.address.zipCode}, {client.address.street}</td>
                             <td>{client.nip}</td>
-                            <td>
-                                <button className='edit'>Edytuj</button>
-                                <button className='showMore'>Zobacz więcej</button>
-                                <button className='delete'>Usuń</button>
-                            </td>
-                        </tr>
-                    )
-                })}
+                       
+                        </tr> */}
+                    
+                
             </tbody>
         </table>
     )
 }
-export default Table;
+export default SingleClientTable;
