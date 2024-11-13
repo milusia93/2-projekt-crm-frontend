@@ -1,31 +1,27 @@
 
-import './ClientsTable.css';
+// import './SingleClientTable.css';
 
 const SingleClientTable = (props) => {
-    
+
     return (
         <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Imię i nazwisko</th>
-                    <th>Adres</th>
-                    <th>NIP</th>
-                    <th>Akcje</th>
-                </tr>
-            </thead>
             <tbody>
-                
-                   
-                        {/* <tr key={client._id}>
-                            <td>{index}</td>
-                            <td>{client.name}</td>
-                            <td>{client.address.city}, {client.address.zipCode}, {client.address.street}</td>
-                            <td>{client.nip}</td>
-                       
-                        </tr> */}
-                    
-                
+                <tr>
+                    <th>Nazwa</th>
+                    <td>{props.client?.name}</td>
+                </tr>
+                <tr>
+                    <th>Adres</th>
+                    <td>{props.client?.address.city}, {props.client?.address.zipCode}, {props.client?.address.street}</td>
+                </tr>
+                <tr>
+                    <th>NIP</th>
+                    <td>{props.client?.nip}</td>
+                </tr>
+                <tr>
+                    <th>Akcje</th>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
     )

@@ -5,11 +5,12 @@ import './ClientsTable.css';
 const ClientsTable = (props) => {
     
     return (
+        <div className='tableWrapper'>
         <table>
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Imię i nazwisko</th>
+                    <th>Nazwa</th>
                     <th>Adres</th>
                     <th>NIP</th>
                     <th>Akcje</th>
@@ -24,15 +25,18 @@ const ClientsTable = (props) => {
                             <td>{client.address.city}, {client.address.zipCode}, {client.address.street}</td>
                             <td>{client.nip}</td>
                             <td>
-                                <button className='edit'>Edytuj</button>
-                                <Link className='showMore' to={`clients/${client._id}`}>Zobacz więcej</Link>
-                                <button className='delete'>Usuń</button>
+                                <Link className='btn edit' to={`/clients/add`} state={client}>Edytuj</Link>
+                                <Link className='btn showMore' to={`clients/${client._id}`}>Zobacz więcej</Link>
+                                <button className='btn delete' onClick={()=>{props.deleteClient(client._id)}}>Usuń</button>
                             </td>
                         </tr>
                     )
                 })}
             </tbody>
         </table>
+        <Link className='btn add' to={`/clients/add`}>Dodaj Klienta</Link>
+        </div>
+        
     )
 }
 export default ClientsTable;

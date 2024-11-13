@@ -1,5 +1,5 @@
 table {
-    width: 100%;
+    width:100%;
     border-collapse: collapse;
 }
 
@@ -23,30 +23,24 @@ td {
     color: rgb(95, 99, 104);
 }
 
-.btn {
+table button {
     padding: 8px;
     margin: 1px;
     color: #fff;
     font-weight: bold;
     border-radius: 10%;
     border: 0;
-    text-decoration: none;
-    font-size: inherit;
-    display: inline-block;
-    font-family: 'Segoe UI', sans-serif;    
-}
-.btn:hover {
-    cursor: pointer;
+    
 }
 
 table button.delete {
     background-color: rgb(158, 5, 5);
       
 }
-table .btn.edit {
+table button.edit {
     background-color: rgb(32, 32, 105);
 }
 
-table .btn.showMore, .add {
+table button.showMore {
     background-color: rgb(4, 90, 4);
 }

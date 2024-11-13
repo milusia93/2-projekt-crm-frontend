@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 a {
@@ -11,6 +11,7 @@ a {
 
 body {
   background-color: rgb(183, 193, 202);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .appViews {

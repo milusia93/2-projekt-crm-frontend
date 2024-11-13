@@ -4,11 +4,15 @@ import { useEffect, useState } from "react";
 import SingleClientTable from "../components/SingleClientTable";
 
 const SingleClient = () => {
-    const [client, setClient] = useState([])
-    
+    const [client, setClient] = useState(null)
+    const params = useParams();
+    const id = params.id
+    // console.log(id);
 
     const getSingleClient = () => {
-        axios.get('http://localhost:3005/clients/:id')
+        
+        
+        axios.get(`http://localhost:3005/clients/${id}`)
             .then((res) => {
                 setClient(res.data)
             })
@@ -20,14 +24,14 @@ const SingleClient = () => {
     useEffect(() => {
         getSingleClient();
     }, [])
-    console.log(client);
-    
-    return <h2>Show details</h2>;
-    // return (
-    //     <div className="tableContainer">
-    //         <SingleClientTable client={client}/>
-    //     </div>
-    // )
+
+
+    // return <h2>Show details</h2>;
+    return (
+        <div className="tableContainer">
+            <SingleClientTable client={client}/>
+        </div>
+    )
 }
 
 export default SingleClient;
