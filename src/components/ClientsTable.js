@@ -25,7 +25,7 @@ const ClientsTable = (props) => {
                             <td>{client.address.city}, {client.address.zipCode}, {client.address.street}</td>
                             <td>{client.nip}</td>
                             <td>
-                                <Link className='btn edit' to={`/clients/add`} state={client}>Edytuj</Link>
+                                <Link className='btn edit' to={`/clients/edit/${client._id}`}>Edytuj</Link>
                                 <Link className='btn showMore' to={`clients/${client._id}`}>Zobacz więcej</Link>
                                 <button className='btn delete' onClick={()=>{props.deleteClient(client._id)}}>Usuń</button>
                             </td>

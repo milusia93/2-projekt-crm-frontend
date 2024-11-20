@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import SingleClientTable from "../components/SingleClientTable";
 
 const SingleClient = () => {
@@ -30,6 +31,9 @@ const SingleClient = () => {
     return (
         <div className="tableContainer">
             <SingleClientTable client={client}/>
+            <div>
+            <Link className='btn edit' to={`/clients/addaction/${client?._id}`}>Dodaj Akcję</Link>
+            </div>
         </div>
     )
 }
