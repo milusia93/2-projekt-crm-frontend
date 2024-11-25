@@ -1,8 +1,10 @@
 import axios from "axios";
+import config from "../config";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import SingleClientTable from "../components/SingleClientTable";
+import ActionsTable from "../components/ActionsTable";
 
 const SingleClient = () => {
     const [client, setClient] = useState(null)
@@ -11,8 +13,8 @@ const SingleClient = () => {
     // console.log(id);
 
     const getSingleClient = () => {
-        
-        
+
+
         axios.get(`http://localhost:3005/clients/${id}`)
             .then((res) => {
                 setClient(res.data)
@@ -24,15 +26,35 @@ const SingleClient = () => {
 
     useEffect(() => {
         getSingleClient();
+
     }, [])
 
+    const deleteAction = (actionId) => {
+        if(window.confirm('Usunąć Akcję?')){
+            axios
+                .delete(config.api.url + '/actions/delete/' + actionId, {mode: 'cors'})
+                .then((res)=>{
+                    console.log(res)
+                    getSingleClient();
+                })
+                .catch((err)=> {
+                    console.error(err)
+                })
+        }
+    }
 
     // return <h2>Show details</h2>;
     return (
         <div className="tableContainer">
-            <SingleClientTable client={client}/>
             <div>
-            <Link className='btn edit' to={`/clients/addaction/${client?._id}`}>Dodaj Akcję</Link>
+                <SingleClientTable client={client} />
+            </div>
+
+            <div>
+                <ActionsTable client={client} deleteAction={deleteAction}/>
+            </div>
+            <div>
+                <Link className='btn edit' to={`/clients/addaction/${client?._id}`}>Dodaj Akcję</Link>
             </div>
         </div>
     )
