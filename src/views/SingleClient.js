@@ -1,3 +1,4 @@
+import './SingleClient.css'
 import axios from "axios";
 import config from "../config";
 import { useParams } from "react-router-dom";
@@ -5,9 +6,12 @@ import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import SingleClientTable from "../components/SingleClientTable";
 import ActionsTable from "../components/ActionsTable";
+import AddActionForm from "../components/AddActionForm";
+
 
 const SingleClient = () => {
     const [client, setClient] = useState(null)
+    const [showModal, setShowModal] = useState(false)
     const params = useParams();
     const id = params.id
     // console.log(id);
@@ -27,7 +31,7 @@ const SingleClient = () => {
     useEffect(() => {
         getSingleClient();
 
-    }, [])
+    }, [client])
 
     const deleteAction = (actionId) => {
         if(window.confirm('Usunąć Akcję?')){
@@ -54,8 +58,12 @@ const SingleClient = () => {
                 <ActionsTable client={client} deleteAction={deleteAction}/>
             </div>
             <div>
-                <Link className='btn edit' to={`/clients/addaction/${client?._id}`}>Dodaj Akcję</Link>
+                <button onClick={()=> setShowModal(true)}>Dodaj Akcję</button>
             </div>
+            {showModal  && <div className="formContainer">  
+                <AddActionForm setShowModal={setShowModal}/>
+            </div>}
+           
         </div>
     )
 }

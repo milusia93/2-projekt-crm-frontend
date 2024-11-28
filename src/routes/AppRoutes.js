@@ -11,8 +11,8 @@ const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/users/login" element={<Login/>}/>
+            <Route path="/users/signup" element={<SignUp/>}/>
             <Route path="/clients/add" element={<AddClient/>}/>
             <Route path="/clients/addaction/:id" element={<AddAction/>}/>
             <Route path="/clients/edit/:id" element={<AddClient/>}/>

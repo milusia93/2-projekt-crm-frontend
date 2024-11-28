@@ -7,8 +7,8 @@ const AppNav = () => {
             <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/clients/add">Add Client</Link></li>
-                <li><Link to="/login">Log In</Link></li>
-                <li><Link to="/signup">Sign up</Link></li>
+                <li><Link to="/users/login">Log In</Link></li>
+                <li><Link to="/users/signup">Sign up</Link></li>
             </ul>
         </nav>
     )
