@@ -48,6 +48,12 @@ const SignUp = () => {
                     
                     if(resData.message.username){
                         setSignUpMessage(resData.message.username[0])
+                        setAddedUser({
+                            username: resData.user.username,
+                            email: resData.user.email,
+                            password: resData.user.password,
+                            confirmPassword: ""
+                        });
                     } else if(resData.message.email){
                         setSignUpMessage(resData.message.email[0])
                     }
@@ -278,22 +284,22 @@ const SignUp = () => {
                 {signUpMessage && <h2>{signUpMessage}</h2>}
                 <div>
                     <label htmlFor="username">User name</label>
-                    <input type="text" id="username" name="username" onChange={handleInputChange} />
+                    <input type="text" id="username" name="username" onChange={handleInputChange} value={addedUser.username} />
                 </div>
                 {errors.username && <p>{errors.username}</p>}
                 <div>
                     <label htmlFor="email">User email</label>
-                    <input type="text" id="email" name="email" onChange={handleInputChange} />
+                    <input type="text" id="email" name="email" onChange={handleInputChange} value={addedUser.email}/>
                 </div>
                 {errors.email && <p>{errors.email}</p>}
                 <div>
                     <label htmlFor="password">User password</label>
-                    <input type="text" id="password" name="password" onChange={handleInputChange} />
+                    <input type="text" id="password" name="password" onChange={handleInputChange} value={addedUser.password}/>
                 </div>
                 {errors.password && <p>{errors.password}</p>}
                 <div>
                     <label htmlFor="confirmPassword">Confirm password</label>
-                    <input type="text" id="confirmPassword" name="confirmPassword" onChange={handleInputChange} />
+                    <input type="text" id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword}/>
                 </div>
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 <button type="submit">Submit</button>
