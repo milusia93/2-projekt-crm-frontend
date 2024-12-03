@@ -289,17 +289,17 @@ const SignUp = () => {
                 {errors.username && <p>{errors.username}</p>}
                 <div>
                     <label htmlFor="email">User email</label>
-                    <input type="text" id="email" name="email" onChange={handleInputChange} value={addedUser.email}/>
+                    <input type="email" id="email" name="email" onChange={handleInputChange} value={addedUser.email}/>
                 </div>
                 {errors.email && <p>{errors.email}</p>}
                 <div>
                     <label htmlFor="password">User password</label>
-                    <input type="text" id="password" name="password" onChange={handleInputChange} value={addedUser.password}/>
+                    <input type="password" id="password" name="password" onChange={handleInputChange} value={addedUser.password}/>
                 </div>
                 {errors.password && <p>{errors.password}</p>}
                 <div>
                     <label htmlFor="confirmPassword">Confirm password</label>
-                    <input type="text" id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword}/>
+                    <input type="password" id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword}/>
                 </div>
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 <button type="submit">Submit</button>
