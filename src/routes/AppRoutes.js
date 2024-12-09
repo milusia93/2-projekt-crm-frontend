@@ -6,12 +6,12 @@ import Login from "../views/LogIn";
 import SignUp from "../views/SignUp";
 import SingleClient from "../views/SingleClient";
 
-const AppRoutes = () => {
+const AppRoutes = (props) => {
 
     return (
         <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/users/login" element={<Login/>}/>
+            <Route path="/users/login" element={<Login user={props.user} setUser={props.setUser}/>}/>
             <Route path="/users/signup" element={<SignUp/>}/>
             <Route path="/clients/add" element={<AddClient/>}/>
             <Route path="/clients/addaction/:id" element={<AddAction/>}/>
