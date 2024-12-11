@@ -1,6 +1,10 @@
 import axios from "axios";
 import config from "../config";
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { Icon } from 'react-icons-kit';
+import { eyeOff } from 'react-icons-kit/feather/eyeOff';
+import { eye } from 'react-icons-kit/feather/eye'
 const SignUp = () => {
 
     const [addedUser, setAddedUser] = useState({
@@ -17,7 +21,69 @@ const SignUp = () => {
         confirmPassword: ""
     })
 
-    const[signUpMessage, setSignUpMessage] = useState('')
+    const [signUpMessage, setSignUpMessage] = useState('')
+
+    const [signup, setSignup] = useState(false)
+    const [type, setType] = useState({
+        password: 'password',
+        confirmPassword: 'password'
+    });
+    const [icon, setIcon] = useState({
+        password: eyeOff,
+        confirmPassword: eyeOff
+    })
+
+    const handleToggle = (e) => {
+        console.log(e.target.parentElement.attributes.name)
+        const target = e.target;
+        const name = target.parentElement.attributes.name;
+        if(name === 'password'){
+            console.log('weszło1')
+            if(type.password === 'password'){
+                console.log('weszło2')
+                setIcon({
+                    ...icon,
+                    [name]: eye,
+                });
+                setType({
+                    ...type,
+                    [name]: 'text',
+                });
+                
+            } else {
+                setIcon({
+                    ...icon,
+                    [name]: eyeOff,
+                });
+                setType({
+                    ...type,
+                    [name]: 'password',
+                });
+            }
+        }
+        if(name === 'confirmPassword'){
+            if(type.confirmPassword === 'password'){
+                setIcon({
+                    ...icon,
+                    [name]: eye,
+                });
+                setType({
+                    ...type,
+                    [name]: 'text',
+                });
+            } else {
+                setIcon({
+                    ...icon,
+                    [name]: eyeOff,
+                });
+                setType({
+                    ...type,
+                    [name]: 'password',
+                });
+            }
+        }
+   
+    }
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -30,7 +96,7 @@ const SignUp = () => {
     };
 
     const saveUser = () => {
-       
+
         axios
             .post(config.api.url + "/users/signup", {
                 username: addedUser.username,
@@ -41,12 +107,13 @@ const SignUp = () => {
                 console.log(res);
                 console.log(res.data);
                 let resData = res.data;
-        
-                if(resData.signedup){
+
+                if (resData.signedup) {
                     setSignUpMessage('Account created')
+                    setSignup(true)
                 } else {
-                    
-                    if(resData.message.username){
+
+                    if (resData.message.username) {
                         setSignUpMessage(resData.message.username[0])
                         setAddedUser({
                             username: resData.user.username,
@@ -54,7 +121,7 @@ const SignUp = () => {
                             password: resData.user.password,
                             confirmPassword: ""
                         });
-                    } else if(resData.message.email){
+                    } else if (resData.message.email) {
                         setSignUpMessage(resData.message.email[0])
                     }
                 }
@@ -80,6 +147,7 @@ const SignUp = () => {
             password: "",
             confirmPassword: ""
         });
+        setSignup(false);
     };
 
     useEffect(() => {
@@ -280,6 +348,7 @@ const SignUp = () => {
 
     return (
         <div className="singnupForm">
+            {signup === true && <Navigate to="/users/login" />}
             <form onSubmit={handleSubmit}>
                 {signUpMessage && <h2>{signUpMessage}</h2>}
                 <div>
@@ -289,17 +358,23 @@ const SignUp = () => {
                 {errors.username && <p>{errors.username}</p>}
                 <div>
                     <label htmlFor="email">User email</label>
-                    <input type="email" id="email" name="email" onChange={handleInputChange} value={addedUser.email}/>
+                    <input type="email" id="email" name="email" onChange={handleInputChange} value={addedUser.email} />
                 </div>
                 {errors.email && <p>{errors.email}</p>}
                 <div>
                     <label htmlFor="password">User password</label>
-                    <input type="password" id="password" name="password" onChange={handleInputChange} value={addedUser.password}/>
+                    <input type={type.password} id="password" name="password" onChange={handleInputChange} value={addedUser.password} />
+                    <span class="flex justify-around items-center" name="password" onClick={handleToggle}>
+                  <Icon class="absolute mr-10" icon={icon.password} size={25} name="password"/>
+              </span>
                 </div>
                 {errors.password && <p>{errors.password}</p>}
                 <div>
                     <label htmlFor="confirmPassword">Confirm password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword}/>
+                    <input type={type.confirmPassword} id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword} />
+                    <span class="flex justify-around items-center" name="confirmPassword" onClick={handleToggle}>
+                  <Icon class="absolute mr-10" icon={icon.confirmPassword} size={25} name="confirmPassword"/>
+              </span>
                 </div>
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 <button type="submit">Submit</button>

@@ -28,8 +28,8 @@ const AppNav = (props) => {
     return (
         <nav className="mainNav">
             <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/clients/add">Add Client</Link></li>
+                {props.user &&<li><Link to="/">Home</Link></li>}
+                {props.user &&<li><Link to="/clients/add">Add Client</Link></li>}
                 {!props.user && <li><Link to="/users/login">Log In</Link></li>}
                 {!props.user && <li><Link to="/users/signup">Sign up</Link></li>}
                 {props.user && <li><Link to="/" onClick={handlelogout}>Log out</Link></li>}
