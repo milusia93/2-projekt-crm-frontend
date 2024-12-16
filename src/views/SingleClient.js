@@ -3,7 +3,6 @@ import axios from "axios";
 import config from "../config";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
 import SingleClientTable from "../components/SingleClientTable";
 import ActionsTable from "../components/ActionsTable";
 import AddActionForm from "../components/AddActionForm";
@@ -31,7 +30,7 @@ const SingleClient = () => {
     useEffect(() => {
         getSingleClient();
 
-    }, [client])
+    }, [])
 
     const deleteAction = (actionId) => {
         if(window.confirm('Usunąć Akcję?')){

@@ -1,7 +1,10 @@
 import axios from "axios";
 import config from "../config";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { Icon } from 'react-icons-kit';
+import { eyeOff } from 'react-icons-kit/feather/eyeOff';
+import { eye } from 'react-icons-kit/feather/eye'
 const Login = (props) => {
 
     const [formData, setFormData] = useState({
@@ -18,6 +21,15 @@ const Login = (props) => {
             ...formData,
             [name]: target.value
         })
+    }
+
+    const [isPasswordVisible, setisPasswordVisible] = useState(false);
+
+
+    const handleToggle = () => {
+
+        setisPasswordVisible(!isPasswordVisible);
+
     }
 
     const resetForm = () => {
@@ -50,7 +62,7 @@ const Login = (props) => {
                 password: formData.password
             }, { mode: "cors" })
             .then((res) => {
-                // console.log(res.data);
+                console.log(res.data);
                 props.setUser(res.data)
                 localStorage.setItem('user', JSON.stringify(res.data))
                 console.log(res)
@@ -59,11 +71,11 @@ const Login = (props) => {
                 }
             })
             .catch((err) => {
-                // console.error(err.response);
-                if (err.response.data.error) {
-                    console.log(err.response)
-                    setLoginMessage(err.response.data.message)
-                }
+                console.error(err);
+                // if (err.response.data.error) {
+                //     console.log(err.response)
+                //     setLoginMessage(err.response.data.message)
+                // }
             });
 
     };
@@ -103,7 +115,10 @@ const Login = (props) => {
                 </div>
                 <div>
                     <label htmlFor="password">User password</label>
-                    <input type="password" id="password" name="password" onChange={handleInputChange} value={formData.password} />
+                    <input type={isPasswordVisible? "text" : "password"} id="password" name="password" onChange={handleInputChange} value={formData.password} />
+                    <span className="flex justify-around items-center" onClick={() => handleToggle("password")}>
+                        <Icon className="absolute mr-10" icon={!isPasswordVisible ? eyeOff : eye} size={25} />
+                    </span>
                 </div>
                 <button type="submit">Login</button>
             </form>

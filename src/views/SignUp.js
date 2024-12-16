@@ -24,66 +24,22 @@ const SignUp = () => {
     const [signUpMessage, setSignUpMessage] = useState('')
 
     const [signup, setSignup] = useState(false)
-    const [type, setType] = useState({
-        password: 'password',
-        confirmPassword: 'password'
+    const [isPasswordVisible, setisPasswordVisible] = useState({
+        password: false,
+        confirmPassword: false
     });
-    const [icon, setIcon] = useState({
-        password: eyeOff,
-        confirmPassword: eyeOff
-    })
 
-    const handleToggle = (e) => {
-        console.log(e.target.parentElement.attributes.name)
-        const target = e.target;
-        const name = target.parentElement.attributes.name;
-        if(name === 'password'){
-            console.log('weszło1')
-            if(type.password === 'password'){
-                console.log('weszło2')
-                setIcon({
-                    ...icon,
-                    [name]: eye,
-                });
-                setType({
-                    ...type,
-                    [name]: 'text',
-                });
-                
-            } else {
-                setIcon({
-                    ...icon,
-                    [name]: eyeOff,
-                });
-                setType({
-                    ...type,
-                    [name]: 'password',
-                });
-            }
-        }
-        if(name === 'confirmPassword'){
-            if(type.confirmPassword === 'password'){
-                setIcon({
-                    ...icon,
-                    [name]: eye,
-                });
-                setType({
-                    ...type,
-                    [name]: 'text',
-                });
-            } else {
-                setIcon({
-                    ...icon,
-                    [name]: eyeOff,
-                });
-                setType({
-                    ...type,
-                    [name]: 'password',
-                });
-            }
-        }
-   
+
+    const handleToggle = (name) => {
+
+        setisPasswordVisible({
+            ...isPasswordVisible,
+            [name]: !isPasswordVisible[name],
+        });
+
     }
+
+
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -363,18 +319,18 @@ const SignUp = () => {
                 {errors.email && <p>{errors.email}</p>}
                 <div>
                     <label htmlFor="password">User password</label>
-                    <input type={type.password} id="password" name="password" onChange={handleInputChange} value={addedUser.password} />
-                    <span class="flex justify-around items-center" name="password" onClick={handleToggle}>
-                  <Icon class="absolute mr-10" icon={icon.password} size={25} name="password"/>
-              </span>
+                    <input type={isPasswordVisible.password ? "text" : "password"} id="password" name="password" onChange={handleInputChange} value={addedUser.password} />
+                    <span className="flex justify-around items-center" onClick={() => handleToggle("password")}>
+                        <Icon className="absolute mr-10" icon={!isPasswordVisible.password ? eyeOff : eye} size={25} />
+                    </span>
                 </div>
                 {errors.password && <p>{errors.password}</p>}
                 <div>
                     <label htmlFor="confirmPassword">Confirm password</label>
-                    <input type={type.confirmPassword} id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword} />
-                    <span class="flex justify-around items-center" name="confirmPassword" onClick={handleToggle}>
-                  <Icon class="absolute mr-10" icon={icon.confirmPassword} size={25} name="confirmPassword"/>
-              </span>
+                    <input type={isPasswordVisible.confirmPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword} />
+                    <span className="flex justify-around items-center" onClick={() => handleToggle("confirmPassword")}>
+                        <Icon className="absolute mr-10" icon={!isPasswordVisible.confirmPassword ? eyeOff : eye} size={25} />
+                    </span>
                 </div>
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                 <button type="submit">Submit</button>
