@@ -33,6 +33,10 @@ const ClientsTable = (props) => {
                     )
                 })}
             </tbody>
+            <tfoot>
+                <button disabled= {props.page === 1} onClick={props.handlePrevious}>Previous</button>
+                <button onClick={props.handleNext}>Next</button>
+            </tfoot>
         </table>
         <Link className='btn add' to={`/clients/add`}>Dodaj Klienta</Link>
         </div>

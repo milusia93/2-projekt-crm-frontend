@@ -26,6 +26,14 @@ const AppRoutes = (props) => {
         }
       />
       <Route
+        path="/page/:pageNumber"
+        element={
+          <ProtectedRoute user={props.user}>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/users/login"
         element={<Login user={props.user} setUser={props.setUser} />}
       />

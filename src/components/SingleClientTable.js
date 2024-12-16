@@ -18,10 +18,6 @@ const SingleClientTable = (props) => {
                     <th>NIP</th>
                     <td>{props.client?.nip}</td>
                 </tr>
-                <tr>
-                    <th>Akcje</th>
-                    <td></td>
-                </tr>
             </tbody>
         </table>
     )

@@ -72,10 +72,10 @@ const Login = (props) => {
             })
             .catch((err) => {
                 console.error(err);
-                // if (err.response.data.error) {
-                //     console.log(err.response)
-                //     setLoginMessage(err.response.data.message)
-                // }
+                if (err.response.data.error) {
+                    console.log(err.response)
+                    setLoginMessage(err.response.data.message)
+                }
             });
 
     };
