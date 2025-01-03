@@ -5,6 +5,9 @@
     align-self: center;
  
 }
+.pagination ul {
+    margin-bottom: 0px;
+}
 .pageItem {
     display: inline-block;
     border: 1px solid black;
@@ -14,10 +17,11 @@
     text-align: center;
     background-color: rgb(234, 243, 252);
     border-radius: 3px;
+    height: 30px;
 }
 .pageNumber {
     width: 30px;
-    height: 30px;
+    
 }
 
 .pageItem:hover {
