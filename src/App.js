@@ -6,6 +6,8 @@ import axios from 'axios';
 
 function App() {
   const [user, setUser]= useState(JSON.parse(localStorage.getItem('user')))
+  console.log(JSON.parse(localStorage.getItem('user')))
+  console.log(user)
   axios.defaults.headers.common['Authorization'] =  (user? user.jwt : "")
   return (
     <div className="App">

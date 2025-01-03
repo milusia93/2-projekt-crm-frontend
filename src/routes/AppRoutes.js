@@ -1,7 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "../views/Home";
 import AddClient from "../views/AddClient";
-import AddAction from "../views/AddAction";
 import Login from "../views/LogIn";
 import SignUp from "../views/SignUp";
 import SingleClient from "../views/SingleClient";
@@ -43,14 +42,6 @@ const AppRoutes = (props) => {
         element={
           <ProtectedRoute user={props.user}>
             <AddClient />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/clients/addaction/:id"
-        element={
-          <ProtectedRoute user={props.user}>
-            <AddAction />
           </ProtectedRoute>
         }
       />

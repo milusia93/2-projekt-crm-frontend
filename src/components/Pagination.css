@@ -1,0 +1,27 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+ 
+}
+.pageItem {
+    display: inline-block;
+    border: 1px solid black;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+    text-align: center;
+    background-color: rgb(234, 243, 252);
+    border-radius: 3px;
+}
+.pageNumber {
+    width: 30px;
+    height: 30px;
+}
+
+.pageItem:hover {
+    cursor: pointer;
+    background-color: rgb(222, 234, 247);
+}
+

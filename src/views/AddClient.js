@@ -256,7 +256,7 @@ const AddClient = () => {
     }
   };
   return (
-    <div>
+    <div className="formBackgroundAddClient">
       <div className="formContainer">
         <AddClientForm
           handleInputChange={handleInputChange}

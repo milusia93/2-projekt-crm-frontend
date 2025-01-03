@@ -55,7 +55,7 @@ const Login = (props) => {
 
     const loginUser = () => {
 
-        
+
         axios
             .post(config.api.url + "/users/login", {
                 username: formData.username,
@@ -105,24 +105,28 @@ const Login = (props) => {
     }
 
     return (
-        <div className="loginForm">
-            {props.user && <Navigate to="/" />}
-            <form onSubmit={handleSubmit}>
-                {loginMessage && <h2>{loginMessage}</h2>}
-                <div>
-                    <label htmlFor="username">User name</label>
-                    <input type="text" id="username" name="username" onChange={handleInputChange} value={formData.username} />
-                </div>
-                <div>
-                    <label htmlFor="password">User password</label>
-                    <input type={isPasswordVisible? "text" : "password"} id="password" name="password" onChange={handleInputChange} value={formData.password} />
-                    <span className="flex justify-around items-center" onClick={() => handleToggle("password")}>
-                        <Icon className="absolute mr-10" icon={!isPasswordVisible ? eyeOff : eye} size={25} />
-                    </span>
-                </div>
-                <button type="submit">Login</button>
-            </form>
+        <div className="formBackgroundAddClient"> 
+            <div className="formContainer">
+                {props.user && <Navigate to="/" />}
+                <form onSubmit={handleSubmit}>
+                    {loginMessage && <h2>{loginMessage}</h2>}
+                    <div>
+                        <label htmlFor="username">User name</label>
+                        <input className='formFields' type="text" id="username" name="username" onChange={handleInputChange} value={formData.username} />
+                    </div>
+                    <div>
+                        <label htmlFor="password">User password</label>
+                        <span className="flex justify-around items-center" onClick={() => handleToggle("password")}>
+                            <Icon className="absolute mr-10 icon" icon={!isPasswordVisible ? eyeOff : eye} size={25} />
+                        </span>
+                        <input className='formFields' type={isPasswordVisible ? "text" : "password"} id="password" name="password" onChange={handleInputChange} value={formData.password} />
+
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
         </div>
+
     )
 }
 

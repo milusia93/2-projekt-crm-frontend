@@ -196,13 +196,13 @@ const SignUp = () => {
                     password: "Wpisz hasło.",
                 };
             });
-        } else if (!/^.{6,12}$/.test(addedUser.password.trim())) {
+        } else if (!/^.{6,}$/.test(addedUser.password.trim())) {
             validationErrors.password = true;
 
             setErrors((prevErrors) => {
                 return {
                     ...prevErrors,
-                    password: "Hasło musi mieć od 6 do 12 znaków.",
+                    password: "Hasło musi mieć conajmniej 6 znaków.",
                 };
             });
         } else if (/\s/.test(addedUser.password.trim())) {
@@ -303,39 +303,43 @@ const SignUp = () => {
 
 
     return (
-        <div className="singnupForm">
-            {signup === true && <Navigate to="/users/login" />}
-            <form onSubmit={handleSubmit}>
-                {signUpMessage && <h2>{signUpMessage}</h2>}
-                <div>
-                    <label htmlFor="username">User name</label>
-                    <input type="text" id="username" name="username" onChange={handleInputChange} value={addedUser.username} />
-                </div>
-                {errors.username && <p>{errors.username}</p>}
-                <div>
-                    <label htmlFor="email">User email</label>
-                    <input type="email" id="email" name="email" onChange={handleInputChange} value={addedUser.email} />
-                </div>
-                {errors.email && <p>{errors.email}</p>}
-                <div>
-                    <label htmlFor="password">User password</label>
-                    <input type={isPasswordVisible.password ? "text" : "password"} id="password" name="password" onChange={handleInputChange} value={addedUser.password} />
-                    <span className="flex justify-around items-center" onClick={() => handleToggle("password")}>
-                        <Icon className="absolute mr-10" icon={!isPasswordVisible.password ? eyeOff : eye} size={25} />
-                    </span>
-                </div>
-                {errors.password && <p>{errors.password}</p>}
-                <div>
-                    <label htmlFor="confirmPassword">Confirm password</label>
-                    <input type={isPasswordVisible.confirmPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword} />
-                    <span className="flex justify-around items-center" onClick={() => handleToggle("confirmPassword")}>
-                        <Icon className="absolute mr-10" icon={!isPasswordVisible.confirmPassword ? eyeOff : eye} size={25} />
-                    </span>
-                </div>
-                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-                <button type="submit">Submit</button>
-            </form>
+        <div className="formBackgroundAddClient">
+            <div className="formContainer">
+                {signup === true && <Navigate to="/users/login" />}
+                <form onSubmit={handleSubmit}>
+                    {signUpMessage && <h2>{signUpMessage}</h2>}
+                    <div>
+                        <label htmlFor="username">User name</label>
+                        <input className='formFields' type="text" id="username" name="username" onChange={handleInputChange} value={addedUser.username} />
+                    </div>
+                    {errors.username && <p>{errors.username}</p>}
+                    <div>
+                        <label htmlFor="email">User email</label>
+                        <input className='formFields' type="email" id="email" name="email" onChange={handleInputChange} value={addedUser.email} />
+                    </div>
+                    {errors.email && <p>{errors.email}</p>}
+                    <div>
+                        <label htmlFor="password">User password</label>
+                        <span className="flex justify-around items-center" onClick={() => handleToggle("password")}>
+                            <Icon className="absolute mr-10 icon" icon={!isPasswordVisible.password ? eyeOff : eye} size={25} />
+                        </span>
+                        <input className='formFields' type={isPasswordVisible.password ? "text" : "password"} id="password" name="password" onChange={handleInputChange} value={addedUser.password} />
+                    </div>
+                    {errors.password && <p>{errors.password}</p>}
+                    <div>
+                        <label htmlFor="confirmPassword">Confirm password</label>
+                        <span className="flex justify-around items-center" onClick={() => handleToggle("confirmPassword")}>
+                            <Icon className="absolute mr-10 icon" icon={!isPasswordVisible.confirmPassword ? eyeOff : eye} size={25} />
+                        </span>
+                        <input className='formFields' type={isPasswordVisible.confirmPassword ? "text" : "password"} id="confirmPassword" name="confirmPassword" onChange={handleInputChange} value={addedUser.confirmPassword} />
+                        
+                    </div>
+                    {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
+
     )
 }
 

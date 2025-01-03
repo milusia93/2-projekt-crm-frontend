@@ -59,8 +59,8 @@ const SingleClient = () => {
             <div>
                 <button onClick={()=> setShowModal(true)}>Dodaj Akcję</button>
             </div>
-            {showModal  && <div className="formContainer">  
-                <AddActionForm setShowModal={setShowModal}/>
+            {showModal  && <div >  
+                <AddActionForm setShowModal={setShowModal} getSingleClient={getSingleClient}/>
             </div>}
            
         </div>

@@ -1,13 +1,14 @@
 import './AddActionForm.css'
 import axios from "axios";
 import config from "../config";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { pl } from 'date-fns/locale/pl';
 import Select from "./Select";
+import { X } from 'lucide-react';
 registerLocale('pl', pl)
 
 const AddActionForm = (props) => {
@@ -21,20 +22,30 @@ const AddActionForm = (props) => {
         ['email', 'Kontakt e-mail']
     ]
 
+    const modalRef = useRef()
+
+    const closeModal = (e) =>{
+        console.log(modalRef.current)
+            console.log(e.target)
+        if(modalRef.current === e.target){
+            
+            props.setShowModal(false)
+        }
+    }
     const handleChangeAction = (e) => {
         setActionType({
             key: e.target.value,
             val: e.target.options[e.target.selectedIndex].innerText
         })
         handleInputChangeAction(e)
-        
+
     }
 
-    const handleChangeDate = (date) =>{
+    const handleChangeDate = (date) => {
         setDate(date);
         handleInputChangeDate(date)
-     
-    } 
+
+    }
 
     const params = useParams();
     const id = params.id;
@@ -60,7 +71,7 @@ const AddActionForm = (props) => {
             ...addedAction,
             specificClient: id,
         });
-     
+
     };
 
     const handleInputChange = (e) => {
@@ -71,7 +82,7 @@ const AddActionForm = (props) => {
             ...addedAction,
             [name]: target.value,
         });
-     
+
     };
 
     const handleInputChangeAction = (e) => {
@@ -81,7 +92,7 @@ const AddActionForm = (props) => {
             ...addedAction,
             actionType: options[target.selectedIndex].innerText,
         });
-      
+
     }
 
     const handleInputChangeDate = (newDate) => {
@@ -90,13 +101,13 @@ const AddActionForm = (props) => {
             ...addedAction,
             date: newDate,
         });
-       
+
     }
 
 
     useEffect(() => {
         if (id) {
-            
+
             handleClientChange()
         }
 
@@ -116,10 +127,12 @@ const AddActionForm = (props) => {
                 console.log(res);
                 console.log(props);
                 props.setShowModal(false)
+                props.getSingleClient()
             })
             .catch((err) => {
                 console.error(err);
             });
+            
 
     };
 
@@ -210,42 +223,53 @@ const AddActionForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-     
+
         if (validateForm()) {
             return;
         }
-       
+
         console.log('Akcja zapisana')
-        saveAction(addedAction);
+        saveAction(addedAction);     
         resetForm();
 
     };
+
+    
+    const height = (e) => {
+        let scHeight = e.target.scrollHeight;
+        console.log(scHeight)
+        e.target.style.height = `${scHeight}px`
+    }
+
     return (
-        <div className="container">
-            <div className="formwrapper">
-            <form onSubmit={handleSubmit}>
-                <div className="wrapper">
-                    <label htmlFor="date">Data</label>
-                    <DatePicker dateFormat='dd-MM-yyyy' locale="pl" id="date" name="date" selected={date} onChange={handleChangeDate} />
+        <div ref={modalRef} className="formBackground" onClick={closeModal}>
+            <div className="modalContainer">
+                <span className='closeX' onClick={()=> props.setShowModal(false)}><X /></span>
+                <div className="formContainer">
+                    <form onSubmit={handleSubmit}>
+                        <div className="wrapper">
+                            <label htmlFor="date">Data</label>
+                            <DatePicker wrapperClassName="datepicker" className='formFields' dateFormat='dd-MM-yyyy' locale="pl" id="date" name="date" selected={date} onChange={handleChangeDate} />
+                        </div>
+                        {errors.date && <p>{errors.date}</p>}
+                        <div>
+                            <label htmlFor="actiontype">Typ akcji</label>
+                            <Select  values={choicesActions} selectedValue={actionType.key} OnValueChange={handleChangeAction} name="actionType" />
+                        </div>
+                        {errors.actionType && <p>{errors.actionType}</p>}
+                        <div>
+                            <label htmlFor="description">Opis</label>
+                            <textarea onKeyUp={height} className='formFields' type="text" id="description" name="description" value={addedAction.description} onChange={handleInputChange}></textarea>
+                        </div>
+                        {errors.description && <p>{errors.description}</p>}
+                        <div>
+                            <button type="submit" onChange={handleInputChange}>Submit</button>
+                        </div>
+                    </form>
                 </div>
-                {errors.date && <p>{errors.date}</p>}
-                <div>
-                    <label htmlFor="actiontype">Typ akcji</label>
-                    <Select values={choicesActions} selectedValue={actionType.key} OnValueChange={handleChangeAction} name="actionType" />
-                </div>
-                {errors.actionType && <p>{errors.actionType}</p>}
-                <div>
-                    <label htmlFor="description">Opis</label>
-                    <input type="text" id="description" name="description" value={addedAction.description} onChange={handleInputChange}></input>
-                </div>
-                {errors.description && <p>{errors.description}</p>}
-                <div>
-                    <button type="submit" onChange={handleInputChange}>Submit</button>
-                </div>
-            </form>
+            </div>
         </div>
-        </div>
-        
+
     )
 }
 export default AddActionForm; 
