@@ -297,7 +297,7 @@ const SignUp = () => {
         console.log('Użytkownik dodany')
 
         saveUser();
-        resetForm();
+        
 
     };
 

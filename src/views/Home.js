@@ -10,6 +10,7 @@ const Home = () => {
     const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(1)
     const [pageCount, setPageCount] = useState(0)
+    const [limit, setLimit] = useState(0)
     
 
 
@@ -19,6 +20,7 @@ const Home = () => {
             .then((res) => {
                 setClients(res.data.data)
                 setPageCount(res.data.pages)
+                setLimit(res.data.limit)
             })
             .catch((err) => {
                 console.error(err)
@@ -64,7 +66,7 @@ const Home = () => {
 
     return (
         <div className="tableContainer">
-            <ClientsTable paginate={paginate} clients={clients} pageCount={pageCount} loading={loading} page={page} handleNext={handleNext} handlePrevious={handlePrevious} deleteClient={deleteClient} />
+            <ClientsTable limit={limit} paginate={paginate} clients={clients} pageCount={pageCount} loading={loading} page={page} handleNext={handleNext} handlePrevious={handlePrevious} deleteClient={deleteClient} />
         </div>
     )
 }

@@ -24,7 +24,7 @@ const ClientsTable = (props) => {
                     {props.clients.map((client, index) => {
                         return (
                             <tr key={client._id}>
-                                <td>{index}</td>
+                                <td>{(index + 1) + (props.page - 1) * props.limit}</td>
                                 <td>{client.name}</td>
                                 <td>{client.address.city}, {client.address.zipCode}, {client.address.street}</td>
                                 <td>{client.nip}</td>

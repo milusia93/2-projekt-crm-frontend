@@ -28,18 +28,19 @@ const AddClient = () => {
     nip: "",
   });
 
-  const getSingleClient = () => {
-    axios
-      .get(`http://localhost:3005/clients/${id}`)
-      .then((res) => {
-        setAddedClient(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+ 
 
   useEffect(() => {
+    const getSingleClient = () => {
+      axios
+        .get(`http://localhost:3005/clients/${id}`)
+        .then((res) => {
+          setAddedClient(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    };
     if (id) {
       getSingleClient();
     }

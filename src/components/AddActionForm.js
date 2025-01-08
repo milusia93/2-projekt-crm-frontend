@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import { pl } from 'date-fns/locale/pl';
 import Select from "./Select";
 import { X } from 'lucide-react';
@@ -115,9 +115,7 @@ const AddActionForm = (props) => {
             resetForm()
         }
     }, [id]);
-    // useEffect(() => {
-    //     getSingleClient();
-    // }, [])
+
 
     const saveAction = (actionObj) => {
         console.log('test');

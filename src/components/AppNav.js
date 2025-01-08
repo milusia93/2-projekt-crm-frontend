@@ -2,7 +2,7 @@ import axios from "axios";
 import config from "../config";
 import "./AppNav.css";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+
 
 const AppNav = (props) => {
   const handlelogout = (e) => {

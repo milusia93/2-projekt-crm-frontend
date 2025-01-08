@@ -30,7 +30,7 @@ const SingleClient = () => {
     useEffect(() => {
         getSingleClient();
 
-    }, [])
+    }, [id])
 
     const deleteAction = (actionId) => {
         if(window.confirm('Usunąć Akcję?')){
