@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
+
 const ActionsTable = (props) => {
 
     return (
@@ -19,7 +21,7 @@ const ActionsTable = (props) => {
                     return (
                         <tr key={action._id}>
                             <td>{index}</td>
-                            <td>{action.date}</td>
+                            <td><Moment format="YYYY/MM/DD">{action.date}</Moment></td>
                             <td>{action.actionType}</td>
                             <td>{action.description}</td>
                             <td>
