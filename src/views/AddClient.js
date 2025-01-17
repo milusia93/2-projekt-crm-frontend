@@ -71,7 +71,6 @@ const AddClient = () => {
   };
 
   const saveClient = (clientObj) => {
-    // console.log(clientObj);
     axios
       .post(config.api.url + "/clients/add", clientObj, { mode: "cors" })
       .then((res) => {
@@ -83,7 +82,7 @@ const AddClient = () => {
   };
 
   const updateClient = (clientObj) => {
-    // console.log(clientObj);
+
     axios
       .put(config.api.url + `/clients/update/${clientObj._id}`, clientObj, {
         mode: "cors",
@@ -233,7 +232,7 @@ const AddClient = () => {
       });
     }
 
-    // console.log(validationErrors)
+
     return (
       validationErrors.name ||
       validationErrors.address.street ||
@@ -242,7 +241,7 @@ const AddClient = () => {
       validationErrors.nip
     );
   };
-  // console.log(errors)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {

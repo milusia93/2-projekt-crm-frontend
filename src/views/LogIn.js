@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye'
+import Cookies from 'js-cookie';
 const Login = (props) => {
 
     const [formData, setFormData] = useState({
@@ -46,8 +47,6 @@ const Login = (props) => {
             return;
         }
 
-        console.log('User loged in')
-
         loginUser();
         resetForm();
 
@@ -57,23 +56,22 @@ const Login = (props) => {
 
 
         axios
-            .post(config.api.url + "/users/login", {
-                username: formData.username,
-                password: formData.password
-            }, { mode: "cors" })
-            .then((res) => {
-                console.log(res.data);
-                props.setUser(res.data)
-                localStorage.setItem('user', JSON.stringify(res.data))
-                console.log(res)
-                if (res.data.error) {
-                    setLoginMessage(res.data.message)
-                }
-            })
+        .post(config.api.url + "/users/login", {
+            username: formData.username,
+            password: formData.password
+        }, { mode: "cors" })
+        .then((res) => {
+            props.setUser(res.data)
+            const user = JSON.stringify(res.data);
+            let inOneHour = 1/24;
+            Cookies.set('user', user, { expires: inOneHour, secure: true });
+            if (res.data.error) {
+                setLoginMessage(res.data.message)
+            }
+        })
             .catch((err) => {
                 console.error(err);
                 if (err.response.data.error) {
-                    console.log(err.response)
                     setLoginMessage(err.response.data.message)
                 }
             });

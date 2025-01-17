@@ -11,7 +11,6 @@ const AppNav = (props) => {
     axios
       .post(config.api.url + "/users/logout")
       .then((res) => {
-        console.log(res.data);
         if (res.data.message) {
           props.setUser(null);
           localStorage.setItem("user", null);

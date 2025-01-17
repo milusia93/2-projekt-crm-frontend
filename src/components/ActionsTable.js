@@ -17,7 +17,6 @@ const ActionsTable = (props) => {
             </thead>
             <tbody>
                 {props.client?.actions.map((action, index)=> {
-                    console.log(action)
                     return (
                         <tr key={action._id}>
                             <td>{index}</td>

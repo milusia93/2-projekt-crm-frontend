@@ -25,8 +25,7 @@ const AddActionForm = (props) => {
     const modalRef = useRef()
 
     const closeModal = (e) =>{
-        console.log(modalRef.current)
-            console.log(e.target)
+
         if(modalRef.current === e.target){
             
             props.setShowModal(false)
@@ -118,12 +117,9 @@ const AddActionForm = (props) => {
 
 
     const saveAction = (actionObj) => {
-        console.log('test');
         axios
             .post(config.api.url + "/actions/add", actionObj, { mode: "cors" })
             .then((res) => {
-                console.log(res);
-                console.log(props);
                 props.setShowModal(false)
                 props.getSingleClient()
             })
@@ -226,7 +222,6 @@ const AddActionForm = (props) => {
             return;
         }
 
-        console.log('Akcja zapisana')
         saveAction(addedAction);     
         resetForm();
 
@@ -235,7 +230,6 @@ const AddActionForm = (props) => {
     
     const height = (e) => {
         let scHeight = e.target.scrollHeight;
-        console.log(scHeight)
         e.target.style.height = `${scHeight}px`
     }
 

@@ -11,14 +11,17 @@ const Home = () => {
     const [page, setPage] = useState(1)
     const [pageCount, setPageCount] = useState(0)
     const [limit, setLimit] = useState(0)
+    const [sortState, setSortState] = useState("ascending");
+    const [sortCategory, setSortCategory] = useState("name");
     
 
 
     const getAllClients = async () => {
         setLoading(true);
-        await axios.get(config.api.url + `/clients?page=${page}&name=asc`)
+        await axios.get(config.api.url + `/clients?page=${page}&direction=${sortState}&category=${sortCategory}`)
             .then((res) => {
                 setClients(res.data.data)
+                console.log(res.data.data)
                 setPageCount(res.data.pages)
                 setLimit(res.data.limit)
             })
@@ -45,14 +48,13 @@ const Home = () => {
 
     useEffect(() => {
         getAllClients();
-    }, [page])
+    }, [page, sortState, sortCategory])
 
     const deleteClient = (clientId) => {
         if (window.confirm('Usunąć Klienta?')) {
             axios
                 .delete(config.api.url + '/clients/delete/' + clientId, { mode: 'cors' })
-                .then((res) => {
-                    console.log(res)
+                .then(() => {
                     getAllClients()
                 })
                 .catch((err) => {
@@ -65,9 +67,21 @@ const Home = () => {
 
 
     return (
+        <div className="main">
+        <select defaultValue={'DEFAULT'} onChange={(e) => {setSortState(e.target.value.split(',')[0]);
+            setSortCategory(e.target.value.split(',')[1]); console.log(sortState)} 
+        }>
+          <option value="ascending,name" disabled>None</option>
+          <option value="ascending,name" >Ascending name</option>
+          <option value="descending,name" >Descending name</option>
+          <option value="ascending,address.city" >Ascending city</option>
+          <option value="descending,address.city" >Descending city</option>
+        </select>
         <div className="tableContainer">
             <ClientsTable limit={limit} paginate={paginate} clients={clients} pageCount={pageCount} loading={loading} page={page} handleNext={handleNext} handlePrevious={handlePrevious} deleteClient={deleteClient} />
         </div>
+      </div>
+     
     )
 }
 

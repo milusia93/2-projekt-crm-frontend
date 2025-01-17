@@ -13,7 +13,6 @@ const SingleClient = () => {
     const [showModal, setShowModal] = useState(false)
     const params = useParams();
     const id = params.id
-    // console.log(id);
 
     const getSingleClient = () => {
 
@@ -37,7 +36,6 @@ const SingleClient = () => {
             axios
                 .delete(config.api.url + '/actions/delete/' + actionId, {mode: 'cors'})
                 .then((res)=>{
-                    console.log(res)
                     getSingleClient();
                 })
                 .catch((err)=> {

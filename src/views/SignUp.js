@@ -60,8 +60,6 @@ const SignUp = () => {
                 password: addedUser.password
             }, { mode: "cors" })
             .then((res) => {
-                console.log(res);
-                console.log(res.data);
                 let resData = res.data;
 
                 if (resData.signedup) {
@@ -294,10 +292,7 @@ const SignUp = () => {
             return;
         }
 
-        console.log('Użytkownik dodany')
-
         saveUser();
-        
 
     };
 
